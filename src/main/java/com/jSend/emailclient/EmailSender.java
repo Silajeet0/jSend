@@ -8,9 +8,9 @@ public class EmailSender {
     public static void main(String[] args) {
         // SMTP server settings
         String host = "smtp.gmail.com";  // Change if using another provider
-        String username = "silajeetbanerjee100@gmail.com";
+        String username = "YOUR_EMAIL_ID";
         String password = "YOUR_APP_PASSWORD"; // Use App Password instead of real password
-        String recipient = "ignite6289@gmail.com";
+        String recipient = "RECEIVER'S_EMAIL_ID";
 
         // Set mail properties
         Properties props = new Properties();
