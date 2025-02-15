@@ -5,45 +5,32 @@ import jakarta.mail.internet.*;
 import java.util.Properties;
 
 public class EmailSender {
-    public static void main(String[] args) {
-        // SMTP server settings
-        String host = "smtp.gmail.com";  // Change if using another provider
-        String username = "YOUR_EMAIL_ID";
-        String password = "YOUR_APP_PASSWORD"; // Use App Password instead of real password
-        String recipient = "RECEIVER'S_EMAIL_ID";
+   public static void sendEmail(MailConfig config, String userName, String passWord, String recipient, String subject, String messageText){
+       Properties props = new Properties();
+       props.put("mail.smtp.auth", true);
+       props.put("mail.smtp.starttls.enable", "true");
+       props.put("mail.smtp.host", config.smtpServer);
+       props.put("mail.smtp.port", config.smtpPort);
+       props.put("mail.smtp.ssl.trust", config.smtpServer);
 
-        // Set mail properties
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.ssl.trust", host);
-
-        // Create a session with authentication
-        Session session = Session.getInstance(props, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+       Session session = Session.getInstance(props, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthenticator(){
+                return new PasswordAuthentication(userName, passWord);
             }
-        });
+       });
 
-        try {
-            // Enable debug mode for detailed output
-            session.setDebug(true);
+       try{
+           Message message = new MimeMessage((session));
+           message.setFrom(new InternetAddress(userName));
+           message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
+           message.setSubject(subject);
+           message.setText((messageText));
 
-            // Create a new email message
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));  // Set sender email
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient));
-            message.setSubject("Test Email from Java");
-            message.setText("Hello, this is a test email sent from Java!");
-
-            // Send the email
-            Transport.send(message);
-            System.out.println("✅ Email sent successfully!");
-        } catch (MessagingException e) {
-            System.err.println("❌ Failed to send email. Error: " + e.getMessage());
-            e.printStackTrace();
-        }
+           Transport.send(message);
+           System.out.println("✅ Email sent successfully to: "+recipient);
+       }catch (MessagingException e){
+           System.err.println("❌ Failed to send the email: "+e.getMessage());
+           e.printStackTrace();
+       }
     }
 }
