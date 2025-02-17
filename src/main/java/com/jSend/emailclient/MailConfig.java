@@ -3,9 +3,9 @@ package com.jSend.emailclient;
 //configuration class to store imap and stmp server details
 public class MailConfig
 {
-    //stmp server address
+    //smtp server address
     public String smtpServer;
-    //stmp server port
+    //smtp server port
     public int smtpPort;
     //imap server address
     public String imapServer;

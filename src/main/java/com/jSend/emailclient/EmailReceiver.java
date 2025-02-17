@@ -5,7 +5,7 @@ import java.util.Properties;
 
 public class EmailReceiver {
     /**
-     * Fetches emails from an IMAP server and prints basic details of up to 5 messages.
+     * Fetches emails from an IMAP server and prints basic details of up to 5 recent messages.
      *
      * @param config   Configuration for the IMAP server (host, port, etc.)
      * @param username The username for authentication
