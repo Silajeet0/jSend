@@ -735,6 +735,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.overflow-hidden {
+  overflow: hidden;
+}
 .scroll-auto {
   scroll-behavior: auto;
 }
@@ -1530,6 +1533,13 @@
       --tw-scale-y: 105%;
       --tw-scale-z: 105%;
       scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+}
+.hover\:underline {
+  &:hover {
+    @media (hover: hover) {
+      text-decoration-line: underline;
     }
   }
 }
