@@ -21,3 +21,41 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 600);
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const loginBtn = document.querySelector("button");
+
+    loginBtn.addEventListener("click", async function (event) {
+        event.preventDefault();
+
+        const email = document.querySelector("input[type='text']").value;
+        const password = document.querySelector("input[type='password']").value;
+
+        if (!email || !password) {
+            alert("Please enter email and password.");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:8080/authenticate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Login successful!");
+                window.location.href = "/dashboard.html";  // Redirect on success
+            } else {
+                alert("Invalid credentials. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Something went wrong. Please try again later.");
+        }
+    });
+});
