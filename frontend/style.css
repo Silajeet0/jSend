@@ -2,12 +2,15 @@ html, body {
     height: 100%;
     margin: 0;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .login-bg {
     background: linear-gradient(300deg, #FC0A9C, #E20AFC, #430AFC, #FE0001, #EB5EFC);
     background-size: 180% 180%;
-    animation: gradient-animation 18s ease infinite;
+    animation: gradient-animation 18s ease infinite !important;
 }
 
 @keyframes gradient-animation {
